@@ -58,8 +58,8 @@ int cooldown(int i){
  2 -> red
  */
 int LED_logic(int i){
-  if(i==0) return 1; // if red
-  if(i==2 && !LED_state[0]) return 1; // if green and not red
+  if(i==2) return 1; // if red
+  if(i==0 && !LED_state[2]) return 1; // if green and not red
   if(i==1 && !LED_state[0] && !LED_state[2]) return 1; // if yellow and not green not red
   return 0; // else
 }
