@@ -22,7 +22,7 @@ long yellowTimer = 0;
 
 void setup() {
   Serial.begin(9600);
-  for(int i=0;i<3;++i){
+  for(int i=0; i<3; ++i){
     pinMode(button[i], INPUT);
     pinMode(LED[i], OUTPUT);
   }
@@ -57,9 +57,9 @@ int cooldown(int i){
  1 -> yellow
  2 -> red
  */
-int LED_logic_check(int i){
-  if(i==2) return 1; // if red
-  if(i==0 && !LED_state[2]) return 1; // if green and not red
+int LED_logic(int i){
+  if(i==0) return 1; // if red
+  if(i==2 && !LED_state[0]) return 1; // if green and not red
   if(i==1 && !LED_state[0] && !LED_state[2]) return 1; // if yellow and not green not red
   return 0; // else
 }
@@ -93,10 +93,10 @@ void LED_blink(int i){
 }
 
 void loop() {
-  for(int i=0;i<3;++i){
-    int Readswitch = digitalRead(button[i]);
-    if(debounce(Readswitch, i) && Readswitch == pressed[i]){
-      if(blinkState[i] == 0 && LED_logic_check(i)){
+  for(int i=0; i<3; ++i){
+    int reading = digitalRead(button[i]);
+    if(debounce(reading, i) && reading == pressed[i]){
+      if(blinkState[i] == 0 && LED_logic(i)){
         blinkState[i] = 1;
         lastTimer[i] = millis();
       }
