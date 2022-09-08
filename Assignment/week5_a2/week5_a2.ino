@@ -1,9 +1,9 @@
 //button setup
-int button[3] = {10, 11, 12};
+int button[3] = {7, 6, 5};
 bool pressed[3] = {LOW, LOW, HIGH};
 
 //LED setup
-int LED[3] = {2, 3, 4};
+int LED[3] = {10, 9, 8};
 bool LED_state[3] = {LOW, LOW, LOW};
 
 //debounce setup
@@ -95,6 +95,7 @@ void LED_blink(int i){
 void loop() {
   for(int i=0; i<3; ++i){
     int reading = digitalRead(button[i]);
+    
     if(debounce(reading, i) && reading == pressed[i]){
       if(blinkState[i] == 0 && LED_logic(i)){
         blinkState[i] = 1;
